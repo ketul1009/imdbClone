@@ -14,4 +14,5 @@ class Movies(models.Model):
     genre = models.CharField(max_length=15)
     releaseDate = models.DateTimeField()
     description = models.CharField(max_length=100)
+    review = models.IntegerField()
 

@@ -9,8 +9,8 @@ from .models import *
 #creating the views to show when urls are requested from the front-end
 
 def index(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    movies = Movies.objects.all()
+    return render(request, 'home.html', {'movies': movies})
 
 def register(request):
     if(request.method=='POST'):
@@ -85,6 +85,3 @@ def movies(request):
     else:
         movies = Movies.objects.all()
         return render(request, 'movies.html', {'movies': movies})
-
-
-

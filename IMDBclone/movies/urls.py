@@ -7,5 +7,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('genre', views.genre, name='genre'),
-    path('moveis', views.movies, name='movies')
+    path('movies', views.movies, name='movies'),
+    path('movies/<int:id>', views.update, name="update")
 ]
