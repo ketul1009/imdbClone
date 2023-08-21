@@ -55,10 +55,36 @@ def genre(request):
 
         if(len(genre) == 0):
             messages.info(request, "Genre cannot be empty")
+            return redirect('genre')
 
         else:
-            user = User.objects.create_user(genre=genre)
-            user.save()
+            genre = Genre.objects.create(genre=genre)
+            genre.save()
             return redirect('/')
     else:
         return render(request, 'genre.html')
+
+def movies(request):
+    if(request.method=='POST'):
+        name = request.POST['name']
+        genre = request.POST['genre']
+        releaseDate = request.POST['releaseDate']
+        if(len(name)==0 or len(genre)==0 or len(releaseDate)==0):
+            messages.info(request, "Genre cannot be empty")
+            return redirect('movies')
+
+        else:
+            if(Genre.objects.filter(genre=genre).exists()):
+                movies = Movies.objects.create(name=name, genre=genre, releaseDate=releaseDate)
+                movies.save()
+                return redirect('movies')
+            else:
+                messages.info(request, "Genre does not exits, add genre before adding movies")
+                return redirect('movies')
+
+    else:
+        movies = Movies.objects.all()
+        return render(request, 'movies.html', {'movies': movies})
+
+
+
