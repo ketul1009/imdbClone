@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'imdbclone',
+        'USER': 'imdbClone',
         'PASSWORD': '12345678',
         'HOST': 'imdbclone.ctzuo4xpdmn4.ap-south-1.rds.amazonaws.com',
         'PORT': '5432'
