@@ -9,8 +9,15 @@ from .models import *
 #creating the views to show when urls are requested from the front-end
 
 def index(request):
-    movies = Movies.objects.all()
-    return render(request, 'home.html', {'movies': movies})
+    if(request.method=='POST'):
+        selectedName = request.POST['name']
+        selectedGenre = request.POST['genre']
+        selectedDate = request.POST['date']
+        movies = Movies.objects.filter(name=selectedName) | Movies.objects.filter(genre=selectedGenre) | Movies.objects.filter(date=selectedDate)
+        return render(request, 'home.html', {'movies': movies})    
+    else:
+        movies = Movies.objects.all()
+        return render(request, 'home.html', {'movies': movies})
 
 def register(request):
     if(request.method=='POST'):
@@ -83,5 +90,4 @@ def movies(request):
                 return redirect('movies')
 
     else:
-        movies = Movies.objects.all()
-        return render(request, 'movies.html', {'movies': movies})
+        return render(request, 'movies.html')
